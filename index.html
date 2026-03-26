@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHRONO — Precision Stopwatch</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <div class="logo">CHRONO<span>·</span>PRO</div>
+    <div class="status-badge">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">STANDBY</span>
+    </div>
+  </header>
+
+  <!-- Main Display -->
+  <div class="display-card">
+    <div class="track-label">Elapsed Time</div>
+    <div class="time-display" id="timeDisplay">
+      00:00<span class="ms" id="msDisplay">.000</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-label">Laps</div>
+        <div class="stat-value" id="lapCountStat">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Best Lap</div>
+        <div class="stat-value best" id="bestLapStat">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Worst Lap</div>
+        <div class="stat-value worst" id="worstLapStat">—</div>
+      </div>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="btn btn-secondary" id="lapBtn" disabled onclick="recordLap()">
+      ◎ &nbsp;LAP
+    </button>
+    <button class="btn btn-primary" id="mainBtn" onclick="toggleTimer()">
+      ▶
+    </button>
+    <button class="btn btn-secondary" id="resetBtn" disabled onclick="resetTimer()">
+      RESET &nbsp;↺
+    </button>
+  </div>
+
+  <!-- Split Controls -->
+  <div class="split-controls">
+    <button class="btn btn-accent" id="splitBtn" disabled onclick="recordSplit()">
+      ⊕ &nbsp;MARK SPLIT
+    </button>
+  </div>
+
+  <!-- Laps Table -->
+  <div class="laps-section">
+    <div class="laps-header">
+      <div class="laps-title">
+        Lap History
+        <span class="lap-count-badge" id="lapBadge">0</span>
+      </div>
+      <button class="btn-clear" onclick="clearLaps()">CLEAR</button>
+    </div>
+
+    <div class="col-header">
+      <div class="col-h">#</div>
+      <div class="col-h">Lap Time</div>
+      <div class="col-h">Split</div>
+      <div class="col-h">Δ Prev</div>
+      <div class="col-h"></div>
+    </div>
+
+    <div class="laps-table" id="lapsContainer">
+      <div class="laps-empty" id="emptyState">NO LAPS RECORDED</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button class="btn-tool" onclick="toggleTheme()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        Theme
+      </button>
+      <button class="btn-tool" onclick="toggleSound()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="soundIcon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        <span id="soundLabel">Sound</span>
+      </button>
+    </div>
+    <div class="keyboard-hint">
+      <kbd>SPACE</kbd> Start/Stop &nbsp;
+      <kbd>L</kbd> Lap &nbsp;
+      <kbd>R</kbd> Reset
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
